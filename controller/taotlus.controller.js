@@ -214,7 +214,10 @@ exports.createUpdateCompany = async (req, res, next) => {
             fs.mkdirSync(`praktikataotlused/${req.params.taotluseId}`)
         }
 
-        const browser = await puppeteer.launch({ headless: true });
+        const browser = await puppeteer.launch({ headless: true, args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+          ] });
         const page = await browser.newPage();
         await page.goto(`https://tartukhk.herokuapp.com/pdf/${req.params.taotluseId}`, {waitUntil: 'networkidle0'});
         await page.pdf({
