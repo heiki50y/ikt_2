@@ -64,35 +64,35 @@ exports.createUpdateTaotlus = async (req, res, next) => {
             Aitäh, et olete nõus juhendama Tartu Kutsehariduskeskuse õpilase (${taotlus.opilase_nimi}, ${taotlus.eriala}) ettevõtte praktikat.
             Palun teil ära täita järgnevad andmed praktikalepingu vormistamiseks.
 
-            https://localhost:3000/taoltus/${taotlus.id}
+            https://localhost:5000/taotlus/${taotlus.id}
 
             Meeldivat koostööd soovides
             praktikakoordinaator
         `
 
-        // let transporter = nodemailer.createTransport({
-        //     // service: 'gmail',
-        //     host: config.get('MAIL_HOST'),
-        //     port: 2525,
-        //     auth: {
-        //         user: config.get('MAIL_USER'),
-        //         pass: config.get('MAIL_PASSWOD')
-        //     }
-        // });
-       
-        // let mailOptions = {
-        //     from: 'praktika@khk.ee', 
-        //     to: taotlus.ettevote_email, 
-        //     subject: `${taotlus.opilase_nimi} praktika dokumendi link`, 
-        //     text: text, 
-        //     html: output 
-        // };
+                let transporter = nodemailer.createTransport({
+                    // service: 'gmail',
+                    host: config.get('MAIL_HOST'),
+                    port: 2525,
+                    auth: {
+                        user: config.get('MAIL_USER'),
+                        pass: config.get('MAIL_PASSWOD')
+                    }
+                });
+            
+                let mailOptions = {
+                    from: 'praktika@khk.ee', 
+                    to: taotlus.ettevote_email, 
+                    subject: `${taotlus.opilase_nimi} praktika dokumendi link`, 
+                    text: text, 
+                    html: output 
+                };
 
-        // transporter.sendMail(mailOptions, (error, info) => {
-        //     if (error) {
-        //         return console.log(error);
-        //     }
-        // });
+                transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                        return console.log(error);
+                    }
+                });
 
         res.status(201).json({
             message: 'Täname, taotlus on saadetud!'
@@ -105,7 +105,7 @@ exports.createUpdateTaotlus = async (req, res, next) => {
 
 exports.getAllTaotlus = async (req, res, next) => {
     try {
-        const student = await Taotlus.find().populate('user', ['name', 'group'])
+        const student = await Company.find().populate('taotlus', ['opilase_nimi', 'eriala', 'oppegrupp'])
           
         res.status(201).json(student);
     
@@ -209,7 +209,7 @@ exports.createUpdateCompany = async (req, res, next) => {
 
         const browser = await puppeteer.launch({ headless: true });
         const page = await browser.newPage();
-        await page.goto(`http://localhost:5000/pdf/${req.params.taotluseId}`, {waitUntil: 'networkidle0'});
+        await page.goto(`https://tartukhk.herokuapp.com/pdf/${req.params.taotluseId}`, {waitUntil: 'networkidle0'});
         await page.pdf({
             path: `praktikataotlused/${req.params.taotluseId}/${data[0].taotlus.opilase_nimi} ${data[0].taotlus.date}.pdf`, format: 'A4' 
         });

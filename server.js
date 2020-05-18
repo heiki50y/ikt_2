@@ -58,10 +58,10 @@ app.use(express.static(path.join(__dirname, 'public')))
 // app.set('views', './views')
 // app.set('view engine', 'pug')
 
-app.use(express.static(path.join(__dirname, 'dist')))
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.get(/.*/, (req, res) => {
-    res.sendFile(__dirname + '/dist/index.html')
+    res.sendFile(__dirname + '/public/index.html')
 })
 
 

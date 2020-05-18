@@ -47,6 +47,12 @@ const CompanySchema = new mongoose.Schema({
     },
     ulesanded: {
         type: Array
+    },
+    created: {
+        type: Date
+    },
+    date: {
+        type: String
     }
 });
 
