@@ -64,7 +64,7 @@ exports.createUpdateTaotlus = async (req, res, next) => {
             Aitäh, et olete nõus juhendama Tartu Kutsehariduskeskuse õpilase (${taotlus.opilase_nimi}, ${taotlus.eriala}) ettevõtte praktikat.
             Palun teil ära täita järgnevad andmed praktikalepingu vormistamiseks.
 
-            https://localhost:5000/taotlus/${taotlus.id}
+            https://tartukhk.herokuapp.com/taotlus/${taotlus.id}
 
             Meeldivat koostööd soovides
             praktikakoordinaator
