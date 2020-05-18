@@ -262,7 +262,7 @@ exports.sendTaotlusIdWithEmail = async (req, res, next) => {
             <ul>  
                 <li>Õpilane ${sendData.nimi}</li>
                 <li>${sendData.eriala}</li>
-                <li>www.domain.ee/taotlus/${sendData.id}</li>
+                <li>www.dddomain.ee/taotlus/${sendData.id}</li>
                 <li>Praktika taotluse <a href="www.domai.ee/taotlus/${sendData.id}">LINK</a></li>
             </ul>
         `;
