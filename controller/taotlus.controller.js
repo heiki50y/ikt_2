@@ -165,6 +165,10 @@ exports.createUpdateCompany = async (req, res, next) => {
        
         console.log(taotlus);
 
+        const date = moment().format('DD.MM.YYYY')
+
+        const created = new Date(moment().format());
+
         const {
             praktikakoha_nimi,
             praktikakoha_epost,
@@ -192,7 +196,8 @@ exports.createUpdateCompany = async (req, res, next) => {
             praktikajuhendaja_tel,
             praktikajuhendaja_epost,
             ulesanded,
-           
+            date,
+            created
         }
 
         let company = await Company.findOneAndUpdate(
