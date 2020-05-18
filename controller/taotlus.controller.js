@@ -221,7 +221,7 @@ exports.createUpdateCompany = async (req, res, next) => {
         const page = await browser.newPage();
         await page.goto(`https://tartukhk.herokuapp.com/pdf/${req.params.taotluseId}`, {waitUntil: 'networkidle0'});
         await page.pdf({
-            path: `praktikataotlused/${req.params.taotluseId}/${data[0].taotlus.opilase_nimi} ${data[0].taotlus.date}.pdf`, format: 'A4' 
+            path: `https://tartukhk.herokuapp.com/praktikataotlused/${req.params.taotluseId}/${data[0].taotlus.opilase_nimi} ${data[0].taotlus.date}.pdf`, format: 'A4' 
         });
         await browser.close();
 
