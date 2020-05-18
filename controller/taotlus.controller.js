@@ -203,14 +203,15 @@ exports.createUpdateCompany = async (req, res, next) => {
         
         const data = await Company.find({ taotlus: req.params.taotluseId }).populate('taotlus');
 
-        
+      
+
         if (!fs.existsSync(`praktikataotlused/${req.params.taotluseId}`)) {
             fs.mkdirSync(`praktikataotlused/${req.params.taotluseId}`)
         }
 
-        const browser = await puppeteer.launch({ headless: true,  args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+        const browser = await puppeteer.launch({ headless: true });
         const page = await browser.newPage();
-        await page.goto(`https://localhost:${process.env.PORT}/pdf/${req.params.taotluseId}`, {waitUntil: 'networkidle0'});
+        await page.goto(`https://tartukhk.herokuapp.com/pdf/${req.params.taotluseId}`, {waitUntil: 'networkidle0'});
         await page.pdf({
             path: `praktikataotlused/${req.params.taotluseId}/${data[0].taotlus.opilase_nimi} ${data[0].taotlus.date}.pdf`, format: 'A4' 
         });
