@@ -53,7 +53,7 @@ exports.createUpdateTaotlus = async (req, res, next) => {
             <p>Aitäh, et olete nõus juhendama Tartu Kutsehariduskeskuse õpilase
             (${taotlus.opilase_nimi}, ${taotlus.eriala}) ettevõtte praktikat.
             Palun Teil ära täita järgnevad andmed praktikalepingu vormistamiseks.</p>
-            <a href="https://tartukhk.herokuapp.com/taotlus/${taotlus.id}">Link</a>
+            <a href="http://localhost:5000/taotlus/${taotlus.id}">Link</a>
             <p>Meeldivat koostööd soovides</br>
             praktikakoordinaator</p>
         `;
@@ -65,6 +65,7 @@ exports.createUpdateTaotlus = async (req, res, next) => {
             Palun teil ära täita järgnevad andmed praktikalepingu vormistamiseks.
 
             https://tartukhk.herokuapp.com/taotlus/${taotlus.id}
+            
 
             Meeldivat koostööd soovides
             praktikakoordinaator

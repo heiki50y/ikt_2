@@ -3,7 +3,8 @@ const moment = require('moment');
 const fs = require('fs')
 const Documents = require('../models/Documents');
 
-const date = moment().format("DD.MM.YYYY--HH.mm.ss")
+    // const date = moment().format("DD.MM.YYYY--HH.mm.ss")
+
 
 const deleteFile = (filetPath) => {
     fs.unlink(filetPath, (err) => {
@@ -18,7 +19,11 @@ const docsStorage = multer.diskStorage({
         cb(null, 'public/dokumendid');
     },
     filename: (req, file, cb) => {
-        cb(null, date + '-' + file.originalname)
+        let r = Math.random().toString(36).substring(7);
+
+        name = `${r}-${file.originalname}`
+
+        cb(null, name)
     }
 })
 
@@ -32,7 +37,7 @@ exports.createDocuments = async (req, res, next) => {
 
         const doc = req.file.originalname
         const docFix = doc.slice(0, doc.length-4);
-        const path = 'dokumendid/' + date + '-' + req.file.originalname
+        const path = 'dokumendid/' + name
 
         
         const docs = await Documents.create({
